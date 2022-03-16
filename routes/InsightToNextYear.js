@@ -4,7 +4,7 @@ const express = require("express");
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /record.
 const router = express.Router();
-const Prediction =require("..models/Prediction")
+
 
 // This will help us connect to the database
 const dbo = require("../db/connection");
@@ -32,6 +32,7 @@ router.route("/InsightToNextYear/:id").get(function (req, res) {
   let myquery = { _id: ObjectId( req.params.id )};
   db_connect
       .collection("predictions")
+      console.log(predictions)
       .findOne(myquery, function (err, result) {
         if (err) throw err;
         res.json(result);
@@ -42,12 +43,12 @@ router.route("/InsightToNextYear/:id").get(function (req, res) {
 router.route("/InsightToNextYear/add").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
-      boot: req.body.boot_winner,
-      second: req.body.second_place,
-      third: req.body.third_place,
-      fourth: req.body.fourth_place,
-      fifth: req.body.fifth_place,
-      flag: req.body.flag_winner,
+      boot: req.body.boot,
+      second: req.body.second,
+      third: req.body.third,
+      fourth: req.body.fourth,
+      fifth: req.body.fifth,
+      flag: req.body.flag,
   };
   db_connect.collection("predictions").insertOne(myobj, function (err, res) {
     if (err) throw err;

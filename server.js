@@ -9,6 +9,7 @@ app.use(require("./routes/InsightToNextYear"));
 // get driver connection
 const dbo = require("./db/connection");
  
+
 app.listen(port, () => {
   // perform a database connection when server starts
   dbo.connectToServer(function (err) {
